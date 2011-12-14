@@ -1,0 +1,7 @@
+C:\Projects\ContactsApp\Contacts\bin\Contacts.dll
+C:\Projects\ContactsApp\Contacts\bin\Contacts.pdb
+C:\Projects\ContactsApp\Contacts\bin\EntityFramework.dll
+C:\Projects\ContactsApp\Contacts\bin\EntityFramework.xml
+C:\Projects\ContactsApp\Contacts\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\ContactsApp\Contacts\obj\Debug\Contacts.dll
+C:\Projects\ContactsApp\Contacts\obj\Debug\Contacts.pdb
