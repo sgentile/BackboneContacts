@@ -19,10 +19,8 @@
     
     <ul id="contacts-list"></ul>
     <p>(double click on name to edit a contact)</p>
-    <div id="edit_contacts_container"></div>    
 </div>
 <div id="app_container"></div>
-
 
 <script type="text/template" id="add_contact_template">
 <fieldset>
@@ -34,7 +32,7 @@
 </script>
 
 <script type="text/template" id="contact_template">
-    <span class="remove-contact">Remove</span>  <span class="contact">${firstname} ${lastname}</span>
+    <span class="remove-contact">Remove </span>  <a href="#contact/edit/${id}" class="contact">${firstname} ${lastname}</a>
 </script>
 
 <script type="text/template" id="edit_template">

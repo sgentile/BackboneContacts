@@ -1,11 +1,10 @@
 *.dll
 *.pdb
 *.suo
-/TestResults
-/obj
+/Contacts/obj
 !/packages/*/lib/*.dll
 !/packages/*/lib/*/*.dll
-/_ReSharper.TouchFirst
-/TouchFirst.6.0.ReSharper.user
-/TouchFirst/TouchFirst.csproj.user
-/TouchFirst/obj
+/_ReSharper.ContactsAppSolution
+/ContactsAppSolution.6.0.ReSharper.user
+/ContactsAppSolution/Contacts.csproj.user
+/ContactsAppSolution/obj

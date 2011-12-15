@@ -5,20 +5,20 @@
 /// <reference path="backbone-localstorage.js" />
 /// <reference path="backbone-mvc-sync.js" />
 $(function () {
-    
+
     Contact = ModelBase.extend({
         defaults: {
             firstname: "",
             lastname: ""
         },
-        urlRoot: "contact/"        
+        urlRoot: "contact/"
     });
 
     Contacts = Backbone.Collection.extend({
         model: Contact,
         url: "contact/list"
         //,localStorage: new Store("contacts")     uncomment to use the sessionStorage option
-    });    
+    });
     contacts = new Contacts();
 
     DefaultView = Backbone.View.extend({
@@ -29,6 +29,7 @@ $(function () {
         render: function () {
             var content = this.template.tmpl();
             $(this.el).html(content);
+
             return this;
         },
         events: {
@@ -58,6 +59,7 @@ $(function () {
             var content = this.template.tmpl(this.model.toJSON());
             //take the rendered HTML and pop it into the DOM
             $(this.el).html(content);
+
             return this;
         },
         save: function () {
@@ -65,10 +67,11 @@ $(function () {
             var lastName = $("#editlastname").val();
             this.model.set({ firstname: firstName, lastname: lastName });
             this.model.save();
-            defaultView.render();
+            app.navigate("", true);
         },
         cancel: function () {
-            defaultView.render();
+            app.navigate("", true);
+            //defaultView.render();
             return false;
         }
     });
@@ -81,23 +84,19 @@ $(function () {
             _.bindAll(this, "render");
         },
         events: {
-            "click span.remove-contact": "remove",
-            "dblclick span.contact": "edit"
+            "click span.remove-contact": "remove"
         },
         render: function () {
             //render the jQuery template
             var content = this.template.tmpl(this.model.toJSON());
             //take the rendered HTML and pop it into the DOM
             $(this.el).html(content);
+
             return this;
         },
         remove: function (e) {
             console.log(this.model.get('id'));
             this.model.destroy();
-        },
-        edit: function () {
-            editContactView = new EditContactView({ model: this.model });
-            editContactView.render();
         }
     });
 
@@ -137,16 +136,19 @@ $(function () {
         initialize: function () {
             defaultView = new DefaultView();
             contactListView = new ContactListView({ collection: contacts });
-        },
-        routes: {
-            "*actions": "defaultRoute" // matches http://example.com/#anything-here
 
         },
-        defaultRoute: function (actions) {
-            switch (actions) {
-                default:
-                    defaultView.render();
-            }
+        routes: {
+            "": "defaultRoute", // matches http://example.com/#anything-here
+            "contact/edit/:id": "editContact"
+        },
+        defaultRoute: function () {
+            defaultView.render();
+        },
+        editContact: function (id) {
+            var model = contacts.get(id);
+            editContactView = new EditContactView({ model: model });
+            editContactView.render();
         }
     });
 
