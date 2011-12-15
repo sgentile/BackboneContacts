@@ -1,4 +1,33 @@
 ﻿/// <reference path="backbone.js" />
+ModelBase = Backbone.Model.extend({
+    defaults: {
+        id: null
+    },
+    url: function (type) {
+        //expecting the following conventions on the server:
+        //urlRoot should be the controller : controller/
+        //create → POST   /action
+        //read → GET   /action[/id]
+        //update → PUT   /action/id
+        //delete → DELETE   /action/id
+        var fqUrl = this.urlRoot;
+        switch (type) {
+            case "POST":
+                fqUrl += "create";
+                break;
+            case "PUT":
+                fqUrl += "update";
+                break;
+            case "DELETE":
+                fqUrl += "delete/" + this.get('id');
+                break;
+            case "GET":
+                fqUrl += "read/" + this.get('id');
+                break;
+        }
+        return fqUrl;
+    }
+});
 
 var methodMap = {
 	'create': 'POST',
@@ -22,6 +51,8 @@ var urlError = function () {
 Backbone.sync = function (method, model, options) {
 	var type = methodMap[method];
 
+	options.url = _.isString(this.url) ? this.url : this.url(type);
+    
 	// Default JSON-request options.
 	var params = _.extend({
 		type: type,
@@ -34,7 +65,7 @@ Backbone.sync = function (method, model, options) {
 	}
 
 	// Ensure that we have the appropriate request data.
-	if (!params.data && model && (method == 'create' || method == 'update' || method == 'delete')) {
+	if (!params.data && model && (method == 'create' || method == 'update')) {
 		params.contentType = 'application/json';
 		params.data = JSON.stringify(model.toJSON());
 	}

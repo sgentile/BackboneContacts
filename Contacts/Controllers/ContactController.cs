@@ -19,19 +19,22 @@ namespace Contacts.Controllers
         };
 
         [HttpGet]
-        [ActionNameAttribute("Contacts")]
-        public ActionResult Get(string id)
+        [ActionNameAttribute("read")]
+        public ActionResult Read(string id)
         {
-            if(!string.IsNullOrEmpty(id))
-            {
-                var contact = ContactsCollection.FirstOrDefault(c => c.id == id);
-                return Json(contact, JsonRequestBehavior.AllowGet);
-            }
+            var contact = ContactsCollection.FirstOrDefault(c => c.id == id);
+            return Json(contact, JsonRequestBehavior.AllowGet);            
+        }
+
+        [HttpGet]
+        [ActionNameAttribute("list")]
+        public ActionResult List()
+        {
             return Json(ContactsCollection, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPut]
-        [ActionNameAttribute("Contacts")]
+        [ActionNameAttribute("update")]
         public ActionResult Update(Contact model)
         {
             var contact = ContactsCollection.FirstOrDefault(c => c.id == model.id);
@@ -45,7 +48,7 @@ namespace Contacts.Controllers
         }
 
         [HttpPost]
-        [ActionNameAttribute("Contacts")]
+        [ActionNameAttribute("create")]
         public ActionResult Create(Contact model)
         {
             model.id = Guid.NewGuid().ToString();
@@ -54,7 +57,7 @@ namespace Contacts.Controllers
         }
 
         [HttpDelete]
-        [ActionNameAttribute("Contacts")]
+        [ActionNameAttribute("delete")]
         public ActionResult Delete(string id)
         {
             var contact = ContactsCollection.FirstOrDefault(c => c.id == id);
