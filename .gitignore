@@ -1,0 +1,11 @@
+*.dll
+*.pdb
+*.suo
+/TestResults
+/obj
+!/packages/*/lib/*.dll
+!/packages/*/lib/*/*.dll
+/_ReSharper.TouchFirst
+/TouchFirst.6.0.ReSharper.user
+/TouchFirst/TouchFirst.csproj.user
+/TouchFirst/obj
