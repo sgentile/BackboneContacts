@@ -1,10 +1,10 @@
 *.dll
 *.pdb
 *.suo
-/Contacts/obj
+obj/
+bin/
 !/packages/*/lib/*.dll
 !/packages/*/lib/*/*.dll
 /_ReSharper.ContactsAppSolution
 /ContactsAppSolution.6.0.ReSharper.user
 /ContactsAppSolution/Contacts.csproj.user
-/ContactsAppSolution/obj
