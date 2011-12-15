@@ -106,6 +106,7 @@
     <Content Include="Scripts\backbone-localstorage.js" />
     <Content Include="Scripts\backbone-mvc-sync.js" />
     <Content Include="Scripts\backbone.js" />
+    <Content Include="Scripts\backbone.marionette.js" />
     <Content Include="Scripts\backbone.min.js" />
     <Content Include="Scripts\backbone.modelbinding.js" />
     <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />

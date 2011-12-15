@@ -4,6 +4,29 @@
 /// <reference path="backbone.js" />
 /// <reference path="backbone-localstorage.js" />
 /// <reference path="backbone-mvc-sync.js" />
+
+var AppView = function () {
+    this.currentView = null;    
+};
+AppView.prototype.showView = function (view) {
+    if (this.currentView) {
+        this.currentView.close();
+    }
+
+    this.currentView = view;
+    this.currentView.render();
+};
+
+Backbone.View.prototype.close = function() {
+    //this.remove();
+    //this.unbind();    
+    if (this.onClose) {
+        this.onClose();
+    }
+};
+
+
+
 $(function () {
 
     Contact = ModelBase.extend({
@@ -29,7 +52,7 @@ $(function () {
         render: function () {
             var content = this.template.tmpl();
             $(this.el).html(content);
-
+            //Backbone.ModelBinding.bind(this);
             return this;
         },
         events: {
@@ -39,8 +62,11 @@ $(function () {
         addContact: function (event) {
             var model = new Contact({ firstname: $("#firstname").val(), lastname: $("#lastname").val() });
             contacts.create(model);
-            this.$("firstname").val("");
-            this.$("lastname").val("");
+            //this.$("firstname").val("");
+            //this.$("lastname").val("");
+        },
+        onClose: function () {
+            //Backbone.ModelBinding.unbind(this);
         }
     });
 
@@ -59,20 +85,24 @@ $(function () {
             var content = this.template.tmpl(this.model.toJSON());
             //take the rendered HTML and pop it into the DOM
             $(this.el).html(content);
-
+            Backbone.ModelBinding.bind(this);
             return this;
         },
         save: function () {
-            var firstName = $("#editfirstname").val();
-            var lastName = $("#editlastname").val();
-            this.model.set({ firstname: firstName, lastname: lastName });
+
+            console.log(JSON.stringify(this.model));
+            alert('check log');
+            //            var firstName = $("#editfirstname").val();
+            //            var lastName = $("#editlastname").val();
+            //            this.model.set({ firstname: firstName, lastname: lastName });
             this.model.save();
-            app.navigate("", true);
+            //            app.navigate("", true);
         },
         cancel: function () {
             app.navigate("", true);
-            //defaultView.render();
-            return false;
+        },
+        onClose: function () {
+            Backbone.ModelBinding.unbind(this);
         }
     });
 
@@ -132,25 +162,34 @@ $(function () {
     });
 
 
+
     AppRouter = Backbone.Router.extend({
         initialize: function () {
-            defaultView = new DefaultView();
+            appView = new AppView();
             contactListView = new ContactListView({ collection: contacts });
-
+            defaultView = new DefaultView();
+            editContactView = new EditContactView();
+        },
+        showAdd: function () {
+            appView.showView(defaultView);
+        },
+        showEdit: function (id) {
+            var contact = contacts.get(id);
+            editContactView.model = contact;
+            appView.showView(editContactView);
         },
         routes: {
             "": "defaultRoute", // matches http://example.com/#anything-here
             "contact/edit/:id": "editContact"
         },
         defaultRoute: function () {
-            defaultView.render();
+            this.showAdd();
         },
         editContact: function (id) {
-            var model = contacts.get(id);
-            editContactView = new EditContactView({ model: model });
-            editContactView.render();
+            this.showEdit(id);
         }
     });
+
 
 
     // Initiate the router

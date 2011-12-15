@@ -18,7 +18,6 @@
 <div id="contacts_container">
     
     <ul id="contacts-list"></ul>
-    <p>(double click on name to edit a contact)</p>
 </div>
 <div id="app_container"></div>
 
@@ -38,8 +37,8 @@
 <script type="text/template" id="edit_template">
 <fieldset>
     <legend>Edit Contact</legend>
-    <label for="firstname">First Name:</label><input type="text" id="editfirstname" value="${firstname}" /><br/>
-    <label for="lastname">Last Name:</label><input type="text" id="editlastname" value="${lastname}" /><br/>
+    First Name: <input type="text" data-bind="value firstname"  /><br/>
+    Last Name: <input type="text" data-bind="value lastname" /><br/>
     <input type="button" id="saveContact_button" value="Save" />
     <input type="button" id="cancelContact_button" value="Cancel" />
 </fieldset>
