@@ -1050,7 +1050,7 @@
     }
 
     // Ensure that we have the appropriate request data.
-    if (!params.data && model && (method == 'create' || method == 'update' || method == 'delete')) {
+    if (!params.data && model && (method == 'create' || method == 'update')) {
       params.contentType = 'application/json';
       params.data = JSON.stringify(model.toJSON());
     }
