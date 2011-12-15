@@ -13,6 +13,7 @@ namespace Contacts.Controllers
     //delete → DELETE   /collection/id
     public class ContactController : Controller
     {
+        //in memory for sample
         public static List<Contact> ContactsCollection = new List<Contact>
         {
             new Contact{id = Guid.NewGuid().ToString(), firstname = "Steve", lastname = "Gentile"}
