@@ -16,5 +16,10 @@ namespace Contacts.Controllers
             return View();
         }
 
+		public ActionResult App()
+		{
+			return View();
+		}
+
     }
 }

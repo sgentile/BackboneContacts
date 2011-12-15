@@ -102,10 +102,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\amplify.min.js" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\app2.js" />
     <Content Include="Scripts\backbone-amplifySessionStorage.js" />
     <Content Include="Scripts\backbone-localstorage.js" />
     <Content Include="Scripts\backbone-mvc-sync.js" />
     <Content Include="Scripts\backbone.js" />
+    <Content Include="Scripts\backbone.marionette.js" />
     <Content Include="Scripts\backbone.min.js" />
     <Content Include="Scripts\backbone.modelbinding.js" />
     <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
@@ -143,7 +145,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Home\App.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

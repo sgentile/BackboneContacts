@@ -1,7 +1,7 @@
-C:\Projects\ContactsApp\Contacts\bin\Contacts.dll
-C:\Projects\ContactsApp\Contacts\bin\Contacts.pdb
-C:\Projects\ContactsApp\Contacts\bin\EntityFramework.dll
-C:\Projects\ContactsApp\Contacts\bin\EntityFramework.xml
-C:\Projects\ContactsApp\Contacts\obj\Debug\ResolveAssemblyReference.cache
-C:\Projects\ContactsApp\Contacts\obj\Debug\Contacts.dll
-C:\Projects\ContactsApp\Contacts\obj\Debug\Contacts.pdb
+C:\Projects\BackboneContacts\Contacts\bin\Contacts.dll
+C:\Projects\BackboneContacts\Contacts\bin\Contacts.pdb
+C:\Projects\BackboneContacts\Contacts\bin\EntityFramework.dll
+C:\Projects\BackboneContacts\Contacts\bin\EntityFramework.xml
+C:\Projects\BackboneContacts\Contacts\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\BackboneContacts\Contacts\obj\Debug\Contacts.dll
+C:\Projects\BackboneContacts\Contacts\obj\Debug\Contacts.pdb
