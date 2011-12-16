@@ -1,6 +1,7 @@
 ﻿/// <reference path="backbone.js" />
 /// <reference path="backbone.marionette.js" />
 /// <reference path="backbone.modelbinding.js" />
+/// <reference path="jquery-ui-1.8.16.js" />
 
 /******  APP ******/
 
@@ -16,7 +17,8 @@ ViewSwitcherApp = new Backbone.Marionette.Application();
 ViewSwitcherApp.addRegions({
 	//navigationRegion: "#navigation",
 	contactsRegion: "#contactsRegion",
-	mainRegion: "#mainRegion"
+	mainRegion: "#mainRegion",
+	editContactsModalRegion: "#editContactsModalRegion"
 });
 
 ViewSwitcherApp.bind("initialize:after", function () {
@@ -84,7 +86,8 @@ ViewSwitcherApp.Contacts = (function (ViewSwitcherApp, Backbone) {
             _.bindAll(this, "render");
         },
         events: {
-            "click span.remove-contact": "remove"
+            "click span.remove-contact": "remove",
+            "click span.edit-contact": "edit"
         },
         render: function () {
             //render the jQuery template
@@ -96,6 +99,9 @@ ViewSwitcherApp.Contacts = (function (ViewSwitcherApp, Backbone) {
         },
         remove: function () {
             this.model.destroy();
+        },
+        edit: function () {
+            ViewSwitcherApp.vent.trigger("editContact", this.model);
         }
     });
 
@@ -146,12 +152,66 @@ ViewSwitcherApp.Contacts = (function (ViewSwitcherApp, Backbone) {
         },
         addContact: function (event) {
             Contacts.contacts.create(this.model);
-            Backbone.ModelBinding.unbind(this);
             ViewSwitcherApp.mainRegion.show(new Contacts.AddContactView());
+        },
+        close: function () {
+            this.remove();
+            this.unbind();
+            Backbone.ModelBinding.unbind(this);
         }
     });
-    
+
+    Contacts.EditContactView = Backbone.View.extend({
+        initialize: function () {
+            this.template = $("#edit-contact-template");
+            _.bindAll(this, "editContact");
+            ViewSwitcherApp.vent.bind('editContact', this.editContact);
+        },
+        render: function () { },
+        editContact: function (contact) {
+            //alert(JSON.stringify(contact));
+            this.model = contact;
+            var modelHolder = this.model;
+            var content = this.template.tmpl(modelHolder.toJSON());
+            var self = this;
+            $(content)
+                .appendTo('body')
+                .dialog({
+                    modal: true,
+                    buttons: {
+                        OK: function () {
+                            var $dialog = $(this);
+
+                            //                            var fn = this.model.get("firstname");
+                            modelHolder.set({ firstname: $("#editFirstName").val(), lastname: $("#editLastName").val() });
+                            //var newObject = $dialog.children('form').serializeObject();
+                            //alert(newObject);
+                            modelHolder.save(contact, {
+                                success: function () {
+                                    $dialog.dialog('close');
+                                }
+                            });
+                        }
+                    },
+                    Cancel: function () {
+                        // Close the dialog:
+                        $(this).dialog('close');
+                    },
+                    close: function (event, ui) {
+                        $(this).remove();
+                    }
+                });
+            return this;
+        },
+        close: function () {
+            this.remove();
+            this.unbind();
+            //Backbone.ModelBinding.unbind(this);
+        }
+    });
+
     Contacts.show = function () {
+        ViewSwitcherApp.editContactsModalRegion.show(new Contacts.EditContactView());
         ViewSwitcherApp.mainRegion.show(new Contacts.AddContactView());
         ViewSwitcherApp.contactsRegion.show(new Contacts.ContactsListView({ collection: Contacts.contacts }));
         ViewSwitcherApp.showRoute("");
