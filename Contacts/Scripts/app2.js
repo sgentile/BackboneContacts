@@ -4,7 +4,6 @@
 /// <reference path="jquery-ui-1.8.16.js" />
 
 /******  APP ******/
-
 var ViewSwitcherApp = {};
 
 Backbone.View.prototype.render = function() {
@@ -15,7 +14,6 @@ Backbone.View.prototype.render = function() {
 ViewSwitcherApp = new Backbone.Marionette.Application();
 
 ViewSwitcherApp.addRegions({
-	//navigationRegion: "#navigation",
 	contactsRegion: "#contactsRegion",
 	mainRegion: "#mainRegion",
 	editContactsModalRegion: "#editContactsModalRegion"
@@ -30,21 +28,23 @@ ViewSwitcherApp.bind("initialize:after", function () {
 /******  ROUTER ******/
 ViewSwitcherApp.Router = Backbone.Router.extend({
 	routes: {
-		"": "defaultRoute",
-		"viewone": "viewone",
-		"viewtwo": "viewtwo"
+	    "": "defaultRoute"
+//        ,
+//		"add": "addViewRoute"
 	},
 	defaultRoute: function () {
-		//show ViewOne as well:
-		//ViewSwitcherApp.ViewOne.show();
 		ViewSwitcherApp.Contacts.show();
-	},
-	viewone: function () {
-		ViewSwitcherApp.ViewOne.show();
-	},
-	viewtwo: function () {
-		ViewSwitcherApp.ViewTwo.show();
-	}
+}
+//    ,
+//    addViewRoute : function () {
+//        ViewSwitcherApp.Contacts.show();
+//    },
+//	viewone: function () {
+//		ViewSwitcherApp.ViewOne.show();
+//	},
+//	viewtwo: function () {
+//		ViewSwitcherApp.ViewTwo.show();
+//	}
 });
 
 ViewSwitcherApp.showRoute = function (route) {
