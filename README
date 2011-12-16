@@ -1,0 +1,16 @@
+This is simply a playground application - to be able to try out different approaches with Backbone.js
+
+Some agenda items:
+1. create a single page app experience
+2. use asp.net mvc controller/actions to support the backbone.sync
+3. alternatively, use amplify sessionStorage (for demo purposes - so the data is cleared after each session)
+4. use Derick Baileys modelbinding and marionette libraries to show binding and view switching 
+5. incorporate validation - rails style (going to try https://github.com/n-time/backbone.validations )
+
+Main example one:  localhost  or localhost/Index
+to use CRUD with asp.net mvc.
+works, but then when trying to switch between 'add' and 'edit' in same element, ran into problems with 'zombies' (see http://lostechies.com/derickbailey/2011/09/15/zombies-run-managing-page-transitions-in-backbone-apps/ )
+
+This led to needing a view manager.  That said, the new (and timely) marionette library uses a composite app approach with view switching (see http://lostechies.com/derickbailey/2011/12/12/composite-js-apps-regions-and-region-managers/ )
+
+This 'project' is a work in progess'

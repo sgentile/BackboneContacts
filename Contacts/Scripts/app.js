@@ -15,11 +15,12 @@ AppView.prototype.showView = function (view) {
 
     this.currentView = view;
     this.currentView.render();
+    $("#app_container").html(this.currentView.el);
 };
 
 Backbone.View.prototype.close = function() {
-    //this.remove();
-    //this.unbind();    
+    this.remove();
+    this.unbind();    
     if (this.onClose) {
         this.onClose();
     }
@@ -45,7 +46,7 @@ $(function () {
     contacts = new Contacts();
 
     DefaultView = Backbone.View.extend({
-        el: "#app_container",
+        //el: "#app_container",
         initialize: function () {
             this.template = $("#add_contact_template");
         },
@@ -71,7 +72,7 @@ $(function () {
     });
 
     EditContactView = Backbone.View.extend({
-        el: "#app_container",
+        //el: "#app_container",
         model: Contact,
         initialize: function () {
             this.template = $("#edit_template");
