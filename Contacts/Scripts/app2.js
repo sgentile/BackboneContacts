@@ -63,13 +63,13 @@ ViewSwitcherApp.Contacts = (function (ViewSwitcherApp, Backbone) {
 		},
 		url: function (type) {
 			if (type == "DELETE")
-				return "../contact/delete/" + this.get('id');
-			return this.isNew() ? "../contact/create" : "../contact/update";
+			    return "Contact/delete/" + this.get('id');
+			return this.isNew() ? "Contact/create" : "Contact/update";
 		}
 	});
 	Contacts.ContactModels = Backbone.Collection.extend({
 		model: Contacts.ContactModel,
-		url: "../contact/list"
+		url: "Contact/list"
 		//url: "http://localhost/Contacts/contact/list"
 	});
 

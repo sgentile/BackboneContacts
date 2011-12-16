@@ -13,6 +13,11 @@ namespace Contacts.Controllers
     //delete → DELETE   /collection/id
     public class ContactController : Controller
     {
+        public ActionResult App()
+        {
+            return View();
+        }
+
         //in memory for sample
         public static List<Contact> ContactsCollection = new List<Contact>
         {
